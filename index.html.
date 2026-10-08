@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXT ZEN EBOOK - Beast Mode</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0d1117;
+            color: #c9d1d9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .ebook-container {
+            width: 100%;
+            max-width: 480px;
+            background: #161b22;
+            border: 2px solid #30363d;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            text-align: center;
+            position: relative;
+        }
+
+        .cover-img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            margin-bottom: 15px;
+        }
+
+        .guide-box {
+            background: #21262d;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+            border: 1px solid #30363d;
+        }
+
+        .arrow-icon {
+            font-size: 40px;
+            display: inline-block;
+            animation: rotateCounterClockwise 2s infinite linear;
+            color: #58a6ff;
+        }
+
+        @keyframes rotateCounterClockwise {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(-360deg); }
+        }
+
+        .btn {
+            background-color: #238636;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            margin: 8px 4px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: #2ea043;
+        }
+
+        .btn-secondary {
+            background-color: #30363d;
+            color: #c9d1d9;
+        }
+
+        .btn-secondary:hover {
+            background-color: #8b949e;
+            color: #0d1117;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .grid-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .content-card {
+            background: #21262d;
+            border-left: 4px solid #58a6ff;
+            text-align: left;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 6px;
+        }
+
+        .cheat-card {
+            background: #1f242c;
+            border: 2px dashed #f1e05a;
+            text-align: left;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .badge-india {
+            background: #1f6feb;
+            color: #fff;
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .badge-world {
+            background: #d29922;
+            color: #0d1117;
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .badge-cheat {
+            background: #f1e05a;
+            color: #0d1117;
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 85%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 6px;
+            border: 1px solid #30363d;
+            background: #0d1117;
+            color: #fff;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        p {
+            line-height: 1.5;
+            margin: 8px 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="ebook-container">
+
+    <!-- FRONT COVER PAGE -->
+    <div id="coverPage" class="page active">
+        <img src="https://i.ibb.co/3k5D8hL/book-cover.jpg" alt="Next Zen Ebook Cover" class="cover-img">
+        
+        <div class="guide-box">
+            <div class="arrow-icon">↺ 🖐️</div>
+            <p><strong>If you want to go to the next step, click below to open the book!</strong></p>
+            <p style="font-size: 12px; color: #8b949e;">(अगर आप अगला पेज खोलना चाहते हैं तो एंटी-क्लॉकवाइज़ दिशा में स्क्रीन स्वाइप करें या नीचे क्लिक करें)</p>
+            
+            <button class="btn btn-secondary" onclick="speakInstruction()">🔊 Listen Instruction</button>
+            <br>
+            <button class="btn" onclick="nextPage('classPage')">Turn Page (Next) ➔</button>
+        </div>
+    </div>
+
+    <!-- CLASS SELECTION PAGE -->
+    <div id="classPage" class="page">
+        <h2>Select Your Class</h2>
+        <p style="font-size: 12px; color: #8b949e;">Choose your grade to explore customized syllabus</p>
+        
+        <div class="grid-options">
+            <button class="btn btn-secondary" onclick="selectClass('Class 6')">Class 6</button>
+            <button class="btn btn-secondary" onclick="selectClass('Class 7')">Class 7</button>
+            <button class="btn btn-secondary" onclick="selectClass('Class 8')">Class 8</button>
+            <button class="btn btn-secondary" onclick="selectClass('Class 9')">Class 9</button>
+            <button class="btn btn-secondary" onclick="selectClass('Class 10')">Class 10</button>
+            <button class="btn btn-secondary" onclick="selectClass('Class 11 & 12')">Class 11 & 12</button>
+        </div>
+
+        <button class="btn btn-secondary" style="margin-top: 20px;" onclick="nextPage('coverPage')">⬅ Back to Cover</button>
+    </div>
+
+    <!-- SUBJECT SELECTION PAGE -->
+    <div id="subjectPage" class="page">
+        <h2 id="selectedClassTitle">Select Subject</h2>
+        
+        <div class="grid-options">
+            <button class="btn" onclick="openTopic('Physics')">Physics</button>
+            <button class="btn" onclick="openTopic('Chemistry')">Chemistry</button>
+            <button class="btn" onclick="openTopic('Biology')">Biology</button>
+            <button class="btn" onclick="openTopic('Maths')">Maths</button>
+            <button class="btn" onclick="openTopic('Social Science')">Social Science</button>
+            <button class="btn" onclick="openTopic('English')">English</button>
+            <button class="btn" onclick="openTopic('Hindi')">Hindi</button>
+        </div>
+
+        <button class="btn btn-secondary" style="margin-top: 20px;" onclick="nextPage('classPage')">⬅ Back</button>
+    </div>
+
+    <!-- TOPIC & CONTENT PAGE -->
+    <div id="contentPage" class="page">
+        <h2 id="topicTitle">Subject Topic</h2>
+        
+        <!-- 90% Indian Core Curriculum -->
+        <div class="content-card">
+            <span class="badge-india">90% India Core Syllabus</span>
+            <h4 style="margin-top: 5px;" id="indiaTopicHeader">Topic Overview</h4>
+            <p id="indiaContent">Content description...</p>
+        </div>
+
+        <!-- 10% Global Knowledge Addition -->
+        <div class="content-card" style="border-left-color: #d29922;">
+            <span class="badge-world">10% Global Innovation</span>
+            <h4 style="margin-top: 5px;" id="worldTopicHeader">Global Tech Fact</h4>
+            <p id="worldContent">World content description...</p>
+        </div>
+
+        <!-- UNLOCKED CHEAT CODE SECTION (UPGRADED EBOOK) -->
+        <div id="unlockedCheatContent" class="cheat-card">
+            <span class="badge-cheat">⚡ UNLOCKED BEAST MODE EBOOK</span>
+            <h3 style="margin-top: 8px; color: #f1e05a;" id="cheatTopicHeader">Solved Examples & Career Guide</h3>
+            
+            <p style="margin-top: 10px;"><strong>📝 Step-by-Step Solved Example:</strong></p>
+            <p id="cheatExample" style="background: #0d1117; padding: 10px; border-radius: 6px; font-family: monospace; border: 1px solid #30363d;">Sample solved problem...</p>
+            
+            <p style="margin-top: 10px;"><strong>🎯 Practice Questions for Mastery:</strong></p>
+            <p id="cheatPractice" style="background: #0d1117; padding: 10px; border-radius: 6px; border: 1px solid #30363d;">Practice questions...</p>
+            
+            <p style="margin-top: 10px;"><strong>🚀 Future Scope & Govt. Posts (NDA / UPSC / IAS / Science Posts):</strong></p>
+            <p id="cheatCareer" style="background: #0d1117; padding: 10px; border-radius: 6px; border: 1px solid #30363d;">Career details...</p>
+        </div>
+
+        <!-- CHEAT CODE INPUT BOX -->
+        <div class="guide-box" style="margin-top: 20px;">
+            <h3>ENTER CHEAT CODE HERE</h3>
+            <input type="text" id="cheatCodeInput" placeholder="Paste cheat code symbol here...">
+            <br>
+            <button class="btn" style="background-color: #d29922; color: #0d1117;" onclick="verifyCheatCode()">Unlock Beast Mode</button>
+            
+            <p style="font-size: 12px; color: #8b949e; margin-top: 12px;">
+                If you want some cheat codes, please go to our <a href="https://youtube.com/@mysteriogang_yt" target="_blank" style="color: #58a6ff; text-decoration: underline;">YouTube Channel</a> and get cheat codes!
+            </p>
+        </div>
+
+        <button class="btn btn-secondary" style="margin-top: 20px;" onclick="nextPage('subjectPage')">⬅ Select Another Subject</button>
+        <button class="btn btn-secondary" onclick="nextPage('coverPage')">🏠 Home</button>
+    </div>
+
+</div>
+
+<script>
+    let currentClass = "";
+    let currentSubject = "";
+
+    // 10 Official Kaomoji Cheat Codes
+    const validCheatCodes = [
+        "( ಠ ʖ̯ ಠ )",
+        "( ▀̿ Ĺ̯ ▀̿ ̿)",
+        "╰( ͡° ͜ʖ ͡° )つ──☆*:・ﾟ",
+        "└( ＾ω＾ )┐",
+        "( ¬_¬ )",
+        "(╯°□°)╯︵ ┻━┻",
+        "┬─┬ノ( º _ ºノ)",
+        "(｡♥‿♥｡)",
+        "( ⌐■_■ )",
+        "(ง ͠° ͟ل͜ ͡°)ง"
+    ];
+
+    function nextPage(pageId) {
+        document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+        document.getElementById(pageId).classList.add('active');
+    }
+
+    function selectClass(className) {
+        currentClass = className;
+        document.getElementById('selectedClassTitle').innerText = className + " - Select Subject";
+        nextPage('subjectPage');
+    }
+
+    function openTopic(subject) {
+        currentSubject = subject;
+        document.getElementById('topicTitle').innerText = currentClass + " - " + subject;
+        document.getElementById('unlockedCheatContent').style.display = 'none'; // Initially hide Beast Mode
+        document.getElementById('cheatCodeInput').value = '';
+
+        if(subject === 'Physics') {
+            document.getElementById('indiaTopicHeader').innerText = "Electricity & Circuits";
+            document.getElementById('indiaContent').innerText = "Electricity flows through conductors like copper wires. Switches control electric current, turning appliances ON or OFF smoothly.";
+            document.getElementById('worldTopicHeader').innerText = "Japan Solar Innovation";
+            document.getElementById('worldContent').innerText = "Japan uses transparent solar panels installed directly on window glasses to generate clean solar electricity.";
+            
+            // Beast Mode Upgraded Data
+            document.getElementById('cheatTopicHeader').innerText = "Physics Beast Mode: Solved & Career Guide";
+            document.getElementById('cheatExample').innerText = "Problem: If Voltage (V) = 220V and Resistance (R) = 110 Ω, find Current (I).\nSolution: Formula I = V / R\nI = 220 / 110 = 2 Amperes.";
+            document.getElementById('cheatPractice').innerText = "1. Why does a bulb filament melt when current is extremely high?\n2. Calculate energy consumed by a 500W appliance run for 4 hours.";
+            document.getElementById('cheatCareer').innerText = "Target Competitive Exams: NDA (Physics Section), ISRO Scientist Assistant, UPSC Engineering Services (IES).\nFuture Posts: Defense Technical Officer, Aerospace Engineer, ISRO Scientist.";
+        } else if(subject === 'Maths') {
+            document.getElementById('indiaTopicHeader').innerText = "Linear Equations";
+            document.getElementById('indiaContent').innerText = "Linear equations use variables like x and y to solve real-world distance and age calculation problems effortlessly.";
+            document.getElementById('worldTopicHeader').innerText = "US AI Weather Models";
+            document.getElementById('worldContent').innerText = "Advanced computing centers in the US use complex linear algebra equations to accurately predict global weather changes.";
+            
+            // Beast Mode Upgraded Data
+            document.getElementById('cheatTopicHeader').innerText = "Maths Beast Mode: Solved & Career Guide";
+            document.getElementById('cheatExample').innerText = "Problem: Solve for x: 3x + 12 = 36.\nSolution: 3x = 36 - 12 => 3x = 24 => x = 8.";
+            document.getElementById('cheatPractice').innerText = "1. Find x if 7x - 21 = 49.\n2. Calculate length of a rectangular park if perimeter is 100m and width is 20m.";
+            document.getElementById('cheatCareer').innerText = "Target Competitive Exams: UPSC CSAT, NDA Mathematics, Banking PO, SSC CGL.\nFuture Posts: Data Analyst, RBI Grade-B Officer, Defense Officer.";
+        } else if(subject === 'Social Science') {
+            document.getElementById('indiaTopicHeader').innerText = "Indian Constitution & Governance";
+            document.getElementById('indiaContent').innerText = "The Indian Constitution guarantees Fundamental Rights to every citizen and establishes the framework for Parliament and courts.";
+            document.getElementById('worldTopicHeader').innerText = "Global Democratic Systems";
+            document.getElementById('worldContent').innerText = "Different countries follow unique systems, like direct democracy in Switzerland where citizens vote directly on individual laws.";
+            
+            // Beast Mode Upgraded Data
+            document.getElementById('cheatTopicHeader').innerText = "Social Science Beast Mode: Solved & Career Guide";
+            document.getElementById('cheatExample').innerText = "Question: What is the difference between Fundamental Rights and Directive Principles?\nSolution: Fundamental Rights are legally enforceable by courts, whereas Directive Principles guide government policymaking.";
+            document.getElementById('cheatPractice').innerText = "1. Which article of the Indian Constitution is known as the 'Heart and Soul' of the Constitution?\n2. Explain the role of the Rajya Sabha in passing money bills.";
+            document.getElementById('cheatCareer').innerText = "Target Competitive Exams: UPSC Civil Services (CSE), State PSC, CDS.\nFuture Posts: IAS (Indian Administrative Service), IPS, IFS (Diplomat), District Magistrate.";
+        } else {
+            document.getElementById('indiaTopicHeader').innerText = subject + " Core Principles";
+            document.getElementById('indiaContent').innerText = "Simplified, clear explainers tailored according to Indian national board textbooks.";
+            document.getElementById('worldTopicHeader').innerText = "Global Application";
+            document.getElementById('worldContent').innerText = "Innovative study methods and practical applications adopted in Japan, USA, and Europe.";
+            
+            // Beast Mode Upgraded Data
+            document.getElementById('cheatTopicHeader').innerText = subject + " Beast Mode Upgrade";
+            document.getElementById('cheatExample').innerText = "Concept Question: Detailed step-by-step solved explanation for advanced preparation.";
+            document.getElementById('cheatPractice').innerText = "1. Advanced Practice Question A\n2. Analytical Question B";
+            document.getElementById('cheatCareer').innerText = "Target Competitive Exams: UPSC CSE, State Board Honors, Defense Exams.\nFuture Posts: Administrative Officers, Researchers, Civil Servants.";
+        }
+
+        nextPage('contentPage');
+    }
+
+    // Auto-Verification for Cheat Codes
+    function verifyCheatCode() {
+        const inputCode = document.getElementById('cheatCodeInput').value.trim();
+        
+        if(validCheatCodes.includes(inputCode)) {
+            document.getElementById('unlockedCheatContent').style.display = 'block';
+            alert("🔥 CHEAT CODE VERIFIED! Beast Mode Upgraded Ebook Unlocked.");
+            document.getElementById('unlockedCheatContent').scrollIntoView({ behavior: 'smooth' });
+        } else if(inputCode !== "") {
+            // Wrong code entered - silently ignore or show hint
+            alert("❌ Cheat Code Not Found! Visit our YouTube Channel to copy the exact code.");
+        }
+    }
+
+    function speakInstruction() {
+        const text = "To turn the page, move your finger or click the button in an anti-clockwise direction, as shown by the rotating arrow above.";
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = "en-US";
+        window.speechSynthesis.speak(utterance);
+    }
+</script>
+
+</body>
+</html>
